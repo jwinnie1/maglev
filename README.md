@@ -25,7 +25,7 @@ You should see `Pipfile` & `Pipfile.lock`. Do not touch these files; they are in
 $ pipenv run maglev-serve
 ```
 
-Maglev will read the `./pages` folder. Every file with the extension `.mako` is mapped to a url (e.g. `hello.mako` will become `/hello`). `index.mako` will be mapped to the root and `404.mako` will be mapped to the 404 page. Any page starting with `_` is ignored.
+Maglev will read the `./pages` folder. Every file with the extension `.mako` is mapped to a url (e.g. `hello.mako` becomes `/hello` and `blog/hello.mako` becomes `/blog/hello`). `index.mako` maps to `/` (`index.mako` in a subdirectory maps to the name of the subdirectory, e.g. `blog/index.mako` maps to `/blog`) and `404.mako` maps to the 404 page. Any page starting with `_` is ignored.
 
 For additional help, type `maglev-serve -h`.
 
