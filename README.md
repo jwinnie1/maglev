@@ -7,7 +7,7 @@
 
 *🚧 Work-in-progress &mdash; not suitable for production 🚧*
 ### Super simple, template-based Async/IO web framework
-![](train.jpg)
+![](https://github.com/jwinnie/maglev/blob/master/train.jpg)
 
 ### Install
 If you haven't already, you should get `python` and `pipenv` (installation depends on operating system).
