@@ -15,7 +15,7 @@ You should see `Pipfile` & `Pipfile.lock`. Do not touch these files; they are in
 
 ### Usage
 ```
-$ maglev-serve
+$ pipenv run maglev-serve
 ```
 
 Maglev will read the `./pages` folder. Every file with the extension `.mako` is mapped to a url (e.g. `hello.mako` will become `/hello`). `index.mako` will be mapped to the root and `404.mako` will be mapped to the 404 page. Any page starting with `_` is ignored.
