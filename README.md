@@ -14,5 +14,12 @@ $ pipenv install maglev
 You should see `Pipfile` & `Pipfile.lock`. Do not touch these files; they are internal files used by `pipenv` for dependency resolution.
 
 ### Usage
-Maglev will read the `pages` folder. Every file with the extension `.mako` is mapped to a url (e.g. `hello.mako` will become `/hello`). `index.mako` will be mapped to the root and `404.mako` will be mapped to the 404 page.
+```
+$ maglev-serve
+```
+
+Maglev will read the `./pages` folder. Every file with the extension `.mako` is mapped to a url (e.g. `hello.mako` will become `/hello`). `index.mako` will be mapped to the root and `404.mako` will be mapped to the 404 page. Any page starting with `_` is ignored.
+
+For additional help, type `maglev-serve -h`.
+
 > Pages are written with the Mako templating language. Information is available on the [official website](http://www.makotemplates.org/).
