@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/jwinnie/maglev.svg?branch=master)](https://travis-ci.org/jwinnie/maglev)
 [![Dependabot](https://badgen.net/badge/Dependabot/enabled/green?icon=dependabot)](https://dependabot.com/)
-![PyPI - Downloads](https://img.shields.io/pypi/dm/maglev.svg)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/maglev.svg)](https://pypi.org/project/maglev)
 
 
 *🚧 Work-in-progress &mdash; not suitable for production 🚧*
