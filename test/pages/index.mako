@@ -1,3 +1,5 @@
 <%inherit file="_base.mako"/>
+<% import datetime %>
 
-Printing hey!
+Hello, World!
+${datetime.datetime.now() | h}

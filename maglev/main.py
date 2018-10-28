@@ -1,5 +1,4 @@
 
-from pathlib import Path
 from aiohttp import web
 import multiprocessing
 import threading
@@ -7,8 +6,10 @@ import asyncio
 import uvloop
 from .middleware import HTTPResponse
 
+
 def start_server(middleware, multi_process=False):
     asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
+
     async def handle(request):
         response_content = HTTPResponse()
         for plugin in middleware:
