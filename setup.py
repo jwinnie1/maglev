@@ -10,7 +10,7 @@ def read(fname):
 pipfile = Project(chdir=False).parsed_pipfile
 
 setup(
-    name="Maglev",
+    name="maglev",
     version="1.0.1",
     author="Jeremy Potter",
     author_email="pypi@stormdesign.us",
