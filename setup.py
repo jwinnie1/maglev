@@ -17,7 +17,8 @@ setup(
     description=("PHP-like Async/IO web framework"),
     long_description=read("README.md"),
     license="GNU",
-    keywords="web framework mako asyncio",
+    keywords="web framework mako async asyncio",
+    url="https://github.com/jwinnie/Maglev",
     install_requires=convert_deps_to_pip(pipfile["packages"], r=False),
     packages=["maglev"],
     scripts=["maglev-serve"]
