@@ -25,6 +25,29 @@ class ErrorRouteHandler(RouteHandler):
             self.code
         )
 
+def index_route(idx: RoutingTable, lookup: TemplateLookup, path: Path, url_root: str = ""):
+    for page in path.iterdir():
+        if page.suffix == ".mako":
+            if page.stem.startswith("_"):
+                continue
+            if page.stem == "404":
+                if url_root == "":
+                    idx["404"] = {
+                        "ERROR": ErrorRouteHandler(lookup.get_template(page.name), 404)
+                    }
+                else:
+                    print("* warn: 404 page cannot be in a subdirectory")
+                    continue
+            elif page.stem == "index":
+                idx[url_root.rstrip("/")] = {
+                    "GET": PageRouteHandler(lookup.get_template(str(path.absolute().relative_to(Path(lookup.directories[0]))) + "/" + page.name))
+                }
+            else:
+                idx[url_root + page.stem] = {
+                    "GET": PageRouteHandler(lookup.get_template(str(path.absolute().relative_to(Path(lookup.directories[0]))) + "/" + page.name))
+                }
+        elif page.is_dir():
+            index_route(idx, lookup, page, "/" + page.name + "/") # Recursion!
 
 def routing_plugin_pages(pages_path: Path) -> RoutingTable:
     output = {}
@@ -32,20 +55,5 @@ def routing_plugin_pages(pages_path: Path) -> RoutingTable:
         directories=[pages_path.absolute()],
         module_directory=pages_path.parent / ".cache" / "pages",
     )
-    for page in pages_path.iterdir():
-        if page.suffix == ".mako":
-            if page.stem.startswith("_"):
-                continue
-            if page.stem == "404":
-                output["404"] = {
-                    "ERROR": ErrorRouteHandler(lookup.get_template(page.name), 404)
-                }
-            elif page.stem == "index":
-                output["/"] = {
-                    "GET": PageRouteHandler(lookup.get_template(page.name))
-                }
-            else:
-                output["/" + page.stem] = {
-                    "GET": PageRouteHandler(lookup.get_template(page.name))
-                }
+    index_route(output, lookup, pages_path)
     return output

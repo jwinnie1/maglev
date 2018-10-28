@@ -11,7 +11,7 @@ pipfile = Project(chdir=False).parsed_pipfile
 
 setup(
     name="maglev",
-    version="1.0.1",
+    version="1.1.0",
     author="Jeremy Potter",
     author_email="pypi@stormdesign.us",
     description=("PHP-like Async/IO web framework"),

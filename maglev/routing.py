@@ -1,6 +1,6 @@
 from typing import Dict, List
 from .middleware import MiddlewarePlugin, HTTPResponse
-
+from urllib.parse import urlparse
 
 class RouteHandler():
     def __init__(self, data):
@@ -24,7 +24,7 @@ class RouterMiddleware(MiddlewarePlugin):
 
     def handle(self, request, response):
         try:
-            return self.routing_table[request.path][request.method].handle_request(request)
+            return self.routing_table[request.path.rstrip("/")][request.method].handle_request(request)
         except KeyError:
             try:
                 return self.routing_table["404"]["ERROR"].handle_request(request)
