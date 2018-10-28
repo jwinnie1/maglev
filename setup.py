@@ -16,6 +16,7 @@ setup(
     author_email="pypi@stormdesign.us",
     description=("PHP-like Async/IO web framework"),
     long_description=read("README.md"),
+    long_description_content_type="text/markdown",
     license="GNU",
     keywords="web framework mako async asyncio",
     url="https://github.com/jwinnie/Maglev",
