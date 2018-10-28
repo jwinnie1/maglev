@@ -10,7 +10,7 @@ If you haven't already, you should get `python` and `pipenv` (installation depen
 ```
 $ mkdir test-project
 $ cd test-project
-$ pipenv install Maglev
+$ pipenv install maglev
 ```
 You should see `Pipfile` & `Pipfile.lock`. Do not touch these files; they are internal files used by `pipenv` for dependency resolution.
 
