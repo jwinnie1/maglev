@@ -11,6 +11,8 @@ mako = "*"
 htmlmin = "*"
 pipenv = "*"
 twine = "*"
+tabulate = "*"
+termcolor = "*"
 
 [dev-packages]
 

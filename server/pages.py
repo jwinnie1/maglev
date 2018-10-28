@@ -2,6 +2,7 @@ from .middleware import HTTPResponse
 from mako.lookup import TemplateLookup
 from .routing import RouteHandler, RoutingTable
 from pathlib import Path
+from termcolor import colored
 
 
 class PageRouteHandler(RouteHandler):
@@ -36,7 +37,7 @@ def index_route(idx: RoutingTable, lookup: TemplateLookup, path: Path, url_root:
                         "ERROR": ErrorRouteHandler(lookup.get_template(page.name), 404)
                     }
                 else:
-                    print("* warn: 404 page cannot be in a subdirectory")
+                    print(colored("warn", "red") + ": 404 page cannot be in a subdirectory")
                     continue
             elif page.stem == "index":
                 idx[url_root.rstrip("/")] = {

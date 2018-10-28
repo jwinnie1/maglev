@@ -20,7 +20,6 @@ class RouterMiddleware(MiddlewarePlugin):
     def __init__(self, plugins: List[RoutingTable]):
         for plugin in plugins:
             self.routing_table = {**self.routing_table, **plugin}
-        print(self.routing_table)
 
     def handle(self, request, response):
         try:

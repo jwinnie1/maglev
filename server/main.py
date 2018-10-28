@@ -1,13 +1,12 @@
 
 from aiohttp import web
-import multiprocessing
 import threading
 import asyncio
 import uvloop
 from .middleware import HTTPResponse
 
 
-def start_server(middleware, multi_process=False):
+def start_server(middleware, port):
     asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 
     async def handle(request):
@@ -27,10 +26,4 @@ def start_server(middleware, multi_process=False):
     app = web.Application()
     app.add_routes([web.route("*", "/{tail:.*}", handle)])
 
-    if multi_process:
-        cpus = multiprocessing.cpu_count()
-        print(f"Launching {cpus} processes...")
-        pool = multiprocessing.Pool(cpus)
-        pool.map(web.run_app, [app for cpu in range(cpus)])
-    else:
-        web.run_app(app)
+    web.run_app(app, port=port)

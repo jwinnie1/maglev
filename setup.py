@@ -11,7 +11,7 @@ pipfile = Project(chdir=False).parsed_pipfile
 
 setup(
     name="maglev",
-    version="1.1.0",
+    version="2.0.0",
     author="Jeremy Potter",
     author_email="pypi@stormdesign.us",
     description=("PHP-like Async/IO web framework"),
@@ -22,5 +22,5 @@ setup(
     url="https://github.com/jwinnie/Maglev",
     install_requires=convert_deps_to_pip(pipfile["packages"], r=False),
     packages=["maglev"],
-    scripts=["maglev-serve"]
+    scripts=["maglev"]
 )
