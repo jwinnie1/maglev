@@ -8,8 +8,9 @@ If you haven't already, you should get `python` and `pipenv` (installation depen
 > Maglev *requires* Python 3.5 or above. Check your python version by typing `python3 -V`.
 
 ```
+$ mkdir test-project
 $ cd test-project
-$ pipenv install maglev
+$ pipenv install Maglev
 ```
 You should see `Pipfile` & `Pipfile.lock`. Do not touch these files; they are internal files used by `pipenv` for dependency resolution.
 
