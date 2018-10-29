@@ -1,6 +1,3 @@
-
-VERSION = 2.0.0
-
 setup:
 	pip install pipenv
 	pipenv install --dev
