@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from argparse import ArgumentParser
+import sys
 from server import start_server, RouterMiddleware, LoggerMiddleware, routing_plugin_pages
 from pathlib import Path
 import mako
@@ -14,23 +15,23 @@ def serve(router, port):
     start_server(MIDDLEWARE_PLUGINS, port=args.port)
 
 
-def routing_table_prettify(input):
+def routing_table_prettify(input, dir):
     output = {}
     for k, v in input:
         for method in v:
             data = v[method].data
             output_k = method + " /" if k == "" else method + " " + k
             if isinstance(data, mako.template.Template):
-                output[output_k] = Path(DIR, "pages", data.uri).relative_to(DIR)
+                output[output_k] = Path(dir, "pages", data.uri).relative_to(dir)
             else:
                 output[output_k] = type(data)
     return map(list, output.items())
 
-def routes(router):
+def routes(router, dir):
     print("========== Routes ==========")
     print(tabulate.tabulate(
         routing_table_prettify(
-            router.routing_table.items()
+            router.routing_table.items(), dir
         ), tablefmt="fancy_grid"
     ))
 
@@ -55,10 +56,14 @@ parser.add_argument("--routes",
 
 args = parser.parse_args()
 
-DIR = Path(args.dir)
-ROUTER = RouterMiddleware([routing_plugin_pages(DIR / "pages")])
-
 if args.command == "serve":
-    serve(ROUTER, args.port)
+    serve(RouterMiddleware([
+        routing_plugin_pages(Path(args.dir, "pages"))
+    ]), args.port)
 elif args.command == "routes":
-    routes(ROUTER)
+    routes(RouterMiddleware([
+        routing_plugin_pages(Path(args.dir, "pages"))
+    ]), args.dir)
+else:
+    parser.print_help(sys.stderr)
+    sys.exit(1)

@@ -44,7 +44,7 @@ def index_route(idx: RoutingTable, lookup: TemplateLookup, path: Path, url_root:
                     "GET": PageRouteHandler(lookup.get_template(str(path.absolute().relative_to(Path(lookup.directories[0]))) + "/" + page.name))
                 }
             else:
-                idx[url_root + page.stem] = {
+                idx[("/" if url_root == "" else url_root) + page.stem] = {
                     "GET": PageRouteHandler(lookup.get_template(str(path.absolute().relative_to(Path(lookup.directories[0]))) + "/" + page.name))
                 }
         elif page.is_dir():
