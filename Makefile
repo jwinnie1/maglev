@@ -10,9 +10,7 @@ clean:
 	rm -r dist/
 
 build:
-	python setup.py sdist bdist bdist_wheel
+	python setup.py sdist bdist_wheel
 
 release:
-	twine upload \
-		dist/maglev-$(VERSION)-py3-none-any.whl \
-		dist/maglev-$(VERSION).tar.gz
+	twine upload dist/*

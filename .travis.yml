@@ -1,6 +1,14 @@
 language: python
 python:
-  - "3.6"
-install: "make setup"
+- '3.6'
+install: make setup
 script:
-  - make build
+- make build
+deploy:
+  provider: pypi
+  user: "jwinnie"
+  distributions: "sdist bdist_wheel"
+  password:
+    secure: xh0Aat+Nbowqs12ObbObj0zAjplQcABbqjXcsnOnc0DmOH/oKiLTwr1m5YEJNYnOkE2W/+ByTnxPJUbf8J+TdB5kAMamBRZERcItflge121O7eGqA6DPLVNKKy/nuFJ6yHs8Kvh+q7NigdMjt79GJFLiB+Omc8TUFRR6RkOKAeOut4yLrbG4g01xfjHaJd+eXCLLi4oha+uPr6dkijiADmVb0B9JB/e5UGbH2DjkQnhKOi1c4+1X6ZfkkMt5aC9IkdTZM4IPcNAg1sbhWgSgmllJJGC4cCA1tuOO7aIUHtjjgLAO3yz3lO+YkIkdi12EJGZo/SBm8zAqozVfGK6zYx78FrkcfeZA5xyF5Iu79pq3C9eYlTBooMyaaxBG4k5Da4RUqRRa585/ZPwan68icoCtoEmURtjzVCZX5nIug6cnxKtqjnokDaA7s9cdAk4DNQLe6+KCsjXemMtNLtgziVMkAWswayPnQ603NtkfJ9iZ2iSca2vyCDq+hsICYsMVTGf+jvJUH9+ex87PCylsl+dpFzVMCLkIib2qtPP58NozDYhCdfbYVzIP1D1Y9NOul/Zqzmoa0IslkyM1WmGjbRuW69ppsFRpDau45kNKI+b3Vc+7Ey61UWPxaJdNhDI70XumsmRni93GEKJ9cfjmScDV+36CdIceLpHcYa8a1QU=
+  on:
+    tags: true
