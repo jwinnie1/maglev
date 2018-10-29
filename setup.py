@@ -21,6 +21,6 @@ setup(
     keywords="web framework mako async asyncio",
     url="https://github.com/jwinnie/Maglev",
     install_requires=convert_deps_to_pip(pipfile["packages"], r=False),
-    packages=["maglev"],
+    packages=["server"],
     scripts=["maglev"]
 )
