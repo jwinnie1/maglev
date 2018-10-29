@@ -6,22 +6,13 @@ from pathlib import Path
 import mako
 import tabulate
 
-parser = ArgumentParser()
-parser.add_argument("-d", "--dir",
-    action="store",
-    default=str(Path.cwd()))
-parser.add_argument("--routes",
-    action="store_true",
-    help="show a routing table for the current application (does not run the server)")
-parser.add_argument("-p", "--port",
-    action="store",
-    default=8888,
-    help="change the port"
-)
-args = parser.parse_args()
+def serve(router, port):
+    MIDDLEWARE_PLUGINS = [
+        router,
+        LoggerMiddleware()
+    ]
+    start_server(MIDDLEWARE_PLUGINS, port=args.port)
 
-DIR = Path(args.dir)
-ROUTER = RouterMiddleware([routing_plugin_pages(DIR / "pages")])
 
 def routing_table_prettify(input):
     output = {}
@@ -35,17 +26,39 @@ def routing_table_prettify(input):
                 output[output_k] = type(data)
     return map(list, output.items())
 
-if args.routes:
+def routes(router):
     print("========== Routes ==========")
     print(tabulate.tabulate(
         routing_table_prettify(
-            ROUTER.routing_table.items()
+            router.routing_table.items()
         ), tablefmt="fancy_grid"
     ))
 
-else:
-    MIDDLEWARE_PLUGINS = [
-        ROUTER,
-        LoggerMiddleware()
-    ]
-    start_server(MIDDLEWARE_PLUGINS, port=args.port)
+parser = ArgumentParser()
+subparsers = parser.add_subparsers(dest="command")
+server_subparser = subparsers.add_parser("serve")
+server_subparser.add_argument("-p", "--port",
+    action="store",
+    default=8888,
+    help="change the port"
+)
+server_subparser.add_argument("-d", "--dir",
+    action="store",
+    default=str(Path.cwd()))
+routes_subparser = subparsers.add_parser("routes")
+routes_subparser.add_argument("-d", "--dir",
+    action="store",
+    default=str(Path.cwd()))
+parser.add_argument("--routes",
+    action="store_true",
+    help="show a routing table for the current application (does not run the server)")
+
+args = parser.parse_args()
+
+DIR = Path(args.dir)
+ROUTER = RouterMiddleware([routing_plugin_pages(DIR / "pages")])
+
+if args.command == "serve":
+    serve(ROUTER, args.port)
+elif args.command == "routes":
+    routes(ROUTER)
