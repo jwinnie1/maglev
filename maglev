@@ -43,6 +43,10 @@ server_subparser.add_argument("-p", "--port",
     default=8888,
     help="change the port"
 )
+server_subparser.add_argument("--prod",
+    action="store_true",
+    help="Run the server in production mode"
+)
 server_subparser.add_argument("-d", "--dir",
     action="store",
     default=str(Path.cwd()))
@@ -58,11 +62,11 @@ args = parser.parse_args()
 
 if args.command == "serve":
     serve(RouterMiddleware([
-        routing_plugin_pages(Path(args.dir, "pages"))
+        routing_plugin_pages(Path(args.dir, "pages"), args.prod)
     ]), args.port)
 elif args.command == "routes":
     routes(RouterMiddleware([
-        routing_plugin_pages(Path(args.dir, "pages"))
+        routing_plugin_pages(Path(args.dir, "pages"), args.prod)
     ]), args.dir)
 else:
     parser.print_help(sys.stderr)

@@ -33,7 +33,7 @@ class LoggerMiddleware(MiddlewarePlugin):
         elif self.mode == "minimal":
             print(f"{request.method} {request.rel_url} => {response.status_code}")
         elif self.mode == "minimal_colorized":
-            if response.status_code == 404:
+            if response.status_code in [404, 500]:
                 status = colored(response.status_code, "red")
             else:
                 status = colored(response.status_code, "green")
