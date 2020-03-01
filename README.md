@@ -1,3 +1,6 @@
+
+## This library is now unmaintained! Do not use this package! Due to some architectural issues I have decided to rewrite this some time in the future as maglev2, stay tuned!
+
 # Maglev
 
 [![Build Status](https://travis-ci.org/jwinnie/maglev.svg?branch=master)](https://travis-ci.org/jwinnie/maglev)
